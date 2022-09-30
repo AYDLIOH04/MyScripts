@@ -36,22 +36,23 @@ def WriteToFile():
         shutil.copy(fr'C:\Users\Pavel\Desktop\ОПД 1 семестр\Scripts\{fileName}',
                     r"C:\Users\Pavel\Desktop\ОПД 1 семестр")
 
-        print('Success!')
+        print(f'{"="*20} Success! {"="*20}')
     except FileNotFoundError:
-        print("Error")
+        print(f'\n{" "*20} Error! {" "*20}')
 
 
+print("=" * 50)
 file = open('Новая форма.txt', encoding="utf8")
 a = file.readlines()
 file.close()
 
 questionsCount = len(a[2].split("\",\""))
-questionIndexes = [int(i) for i in input(f"Enter question indexes from 1 to {questionsCount - 1} >>> ").split()]
+questionIndexes = [int(i) for i in set(input(f"  Enter question indexes from 1 to {questionsCount - 1} >>> ").split()) if 0 < int(i) < questionsCount]
 questionIndexes.sort()
 
 answers = SaveAnswersInMassiv()
 numberOfRespondents = len(a) - 2
-fileName = rf'{input("Enter the file name >>> ")}.txt'
+fileName = rf'{input("  Enter the file name >>> ")}.txt'
 
 WriteToFile()
 
