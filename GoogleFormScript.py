@@ -27,8 +27,10 @@ def WriteToFile():
     try:
         file = open(fileName, 'w', encoding="utf8")
         file.write(f"Количество опрошенных {numberOfRespondents}\n\n")
+        i = 0
         for indexAns in answers:
-            OutputAnswers(indexAns[0], indexAns[1:], file)
+            OutputAnswers(f"{questionIndexes[i]}. {indexAns[0]}", indexAns[1:], file)
+            i += 1
         file.close()
 
         shutil.copy(fr'C:\Users\Pavel\Desktop\ОПД 1 семестр\Scripts\{fileName}',
@@ -45,10 +47,12 @@ file.close()
 
 questionsCount = len(a[2].split("\",\""))
 questionIndexes = [int(i) for i in input(f"Enter question indexes from 1 to {questionsCount - 1} >>> ").split()]
-
+questionIndexes.sort()
 
 answers = SaveAnswersInMassiv()
 numberOfRespondents = len(a) - 2
 fileName = rf'{input("Enter the file name >>> ")}.txt'
 
 WriteToFile()
+
+
